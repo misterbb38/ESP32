@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пример WebSocket с ESP32</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #f4f4f4;
+      margin: 5px;
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Данные от ESP32</h1>
+  
+  <ul id="data-list"></ul>
+
+  <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
+  <script>
+    // Подключение к WebSocket серверу
+    const socket = io();
+
+    // Обработка новых данных от ESP32
+    socket.on('esp32-data', (data) => {
+      const dataList = document.getElementById('data-list');
+      const listItem = document.createElement('li');
+      listItem.textContent = data;
+      dataList.appendChild(listItem);
+    });
+  </script>
+
+</body>
+</html>
